@@ -4,14 +4,20 @@ Cada paso funciona como una **variable inmutable**: una vez creado, no cambia, p
 Ejemplo conceptual:
 
 let 
+
 Paso1 = ...,
+
 Paso2 = Función(Paso1),
+
 Paso3 = Función(Paso2)
+
 In
+
 Paso3
 
 El valor que se devuelve finalmente es el que aparece después del `in`.
 Este diseño permite construir una **cadena de transformaciones**, donde cada paso depende del anterior, manteniendo claridad y orden lógico.
+
 ---
 ## 2. ¿Por qué M es Case Sensitive y qué consecuencia práctica tiene? Dá un ejemplo de un error que esto puede causar.
 Lenguaje M distingue entre mayúsculas y minúsculas en:
@@ -29,6 +35,7 @@ Table.TransformColumns(...)
 
 Consecuencia práctica:
 Si un paso se llama `EstandarizarCategoria` y luego se referencia como `estandarizarcategoria`, M no lo encuentra y el script se rompe.
+
 ---
 ## 3. ¿Cuál es la diferencia entre usar `Text.Trim` y `Text.Clean` en M?
 * **Text.Trim**: Elimina espacios al inicio y al final del texto. Se usa para limpiar valores con espacios “leading” y “trailing”.
