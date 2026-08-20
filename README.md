@@ -2,12 +2,14 @@
 En lenguaje M, el bloque `let ... in` define una **secuencia de pasos** donde cada uno genera un valor (generalmente una tabla) que puede ser utilizado por los pasos siguientes.
 Cada paso funciona como una **variable inmutable**: una vez creado, no cambia, pero puede ser referenciado por nombre.
 Ejemplo conceptual:
+
 let 
 Paso1 = ...,
 Paso2 = Función(Paso1),
 Paso3 = Función(Paso2)
 In
 Paso3
+
 El valor que se devuelve finalmente es el que aparece después del `in`.
 Este diseño permite construir una **cadena de transformaciones**, donde cada paso depende del anterior, manteniendo claridad y orden lógico.
 ---
@@ -18,9 +20,13 @@ Lenguaje M distingue entre mayúsculas y minúsculas en:
 * ** valores de texto (`"Prueba"` ≠ `"PRUEBA"`)
 Esto significa que cualquier diferencia en el uso de mayúsculas genera errores o resultados incorrectos.
 Ejemplo de error típico:
+
 table.transformcolumns(...)
+
 Esto falla porque la función correcta es:
+
 Table.TransformColumns(...)
+
 Consecuencia práctica:
 Si un paso se llama `EstandarizarCategoria` y luego se referencia como `estandarizarcategoria`, M no lo encuentra y el script se rompe.
 ---
@@ -32,9 +38,13 @@ En esta práctica se usa **Text.Trim** porque el problema del dataset son **espa
 ## 4. ¿Por qué filtraste los registros "PRUEBA" después de estandarizar la categoría y no antes?
 Porque M es **case sensitive**. Si filtrás antes de estandarizar, solo eliminarías `"PRUEBA"` en mayúsculas, pero no `"prueba"` o `"Prueba"`.
 Después de aplicar:
+
 Text.Proper
+
 todas las variantes quedan convertidas en:
+
 "Prueba"
+
 Recién ahí el filtro funciona correctamente:
 each [categoria] <> "Prueba"
 Si se filtrara antes, quedarían registros incorrectos y la tabla final no tendría las 5 filas requeridas.
